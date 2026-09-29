@@ -1,3 +1,1076 @@
-<h1> Hola mundo </h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Forchetta - Pizzería</title>
 
-<p> pepe<p>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fffaf3;
+      color: #292929;
+    }
+
+    /* ================= HEADER ================= */
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(20, 20, 20, 0.96);
+      color: white;
+      padding: 16px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #f5c542;
+    }
+
+    .logo span {
+      color: #e63946;
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #f5c542;
+    }
+
+    .cart-button {
+      background: #e63946;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .cart-button:hover {
+      background: #c92d39;
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      min-height: 100vh;
+      padding: 140px 7% 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 50px;
+
+      background:
+        linear-gradient(
+          rgba(0, 0, 0, 0.55),
+          rgba(0, 0, 0, 0.55)
+        ),
+        url("https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=1800&q=80");
+
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 650px;
+    }
+
+    .hero h1 {
+      font-size: clamp(45px, 7vw, 80px);
+      line-height: 1;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: #f5c542;
+    }
+
+    .hero p {
+      font-size: 20px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: #e63946;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #c92d39;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #222;
+    }
+
+    .btn-secondary:hover {
+      background: #f5c542;
+    }
+
+    /* ================= GENERAL ================= */
+
+    section {
+      padding: 90px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #777;
+      font-size: 18px;
+    }
+
+    /* ================= MENU ================= */
+
+    .menu {
+      background: #fffaf3;
+    }
+
+    .pizza-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+    }
+
+    .pizza-card {
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      transition: 0.3s;
+    }
+
+    .pizza-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.13);
+    }
+
+    .pizza-image {
+      height: 210px;
+      overflow: hidden;
+    }
+
+    .pizza-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.4s;
+    }
+
+    .pizza-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .pizza-info {
+      padding: 22px;
+    }
+
+    .pizza-info h3 {
+      font-size: 23px;
+      margin-bottom: 8px;
+    }
+
+    .pizza-info p {
+      color: #777;
+      line-height: 1.5;
+      margin-bottom: 18px;
+      min-height: 45px;
+    }
+
+    .pizza-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .price {
+      font-size: 23px;
+      font-weight: bold;
+      color: #e63946;
+    }
+
+    .add-button {
+      border: none;
+      background: #222;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .add-button:hover {
+      background: #e63946;
+    }
+
+    /* ================= ABOUT ================= */
+
+    .about {
+      background: #202020;
+      color: white;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .about img {
+      width: 100%;
+      border-radius: 20px;
+      max-height: 500px;
+      object-fit: cover;
+    }
+
+    .about h2 {
+      font-size: 45px;
+      margin-bottom: 20px;
+    }
+
+    .about p {
+      color: #ddd;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .feature {
+      background: #2d2d2d;
+      padding: 18px;
+      border-radius: 12px;
+    }
+
+    .feature strong {
+      display: block;
+      color: #f5c542;
+      margin-bottom: 5px;
+    }
+
+    /* ================= CONTACT ================= */
+
+    .contact-container {
+      max-width: 900px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .contact-card {
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+    }
+
+    .contact-card h3 {
+      margin-bottom: 20px;
+      font-size: 25px;
+    }
+
+    .contact-card p {
+      margin: 12px 0;
+      color: #666;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 15px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    form button {
+      border: none;
+      background: #e63946;
+      color: white;
+      padding: 14px;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background: #c92d39;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      background: #111;
+      color: white;
+      padding: 35px 7%;
+      text-align: center;
+    }
+
+    footer .logo {
+      margin-bottom: 12px;
+    }
+
+    footer p {
+      color: #aaa;
+    }
+
+    /* ================= CART ================= */
+
+    .cart-panel {
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: 400px;
+      max-width: 90%;
+      height: 100vh;
+      background: white;
+      z-index: 2000;
+      padding: 25px;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+      transition: 0.35s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-panel.active {
+      right: 0;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .cart-header h2 {
+      font-size: 25px;
+    }
+
+    .close-cart {
+      border: none;
+      background: none;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    #cart-items {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+      padding: 15px 0;
+      gap: 10px;
+    }
+
+    .cart-item-info strong {
+      display: block;
+    }
+
+    .cart-item-info small {
+      color: #777;
+    }
+
+    .remove-item {
+      border: none;
+      background: #eee;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+
+    .cart-total {
+      border-top: 2px solid #eee;
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 21px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .checkout {
+      width: 100%;
+      border: none;
+      padding: 15px;
+      border-radius: 25px;
+      background: #e63946;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .empty-cart {
+      text-align: center;
+      color: #888;
+      padding: 40px 10px;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 800px) {
+
+      header {
+        padding: 15px 5%;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        text-align: center;
+        justify-content: center;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .about {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      La <span>Forchetta</span> 🍕
+    </div>
+
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#menu">Menú</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <button class="cart-button" onclick="toggleCart()">
+      🛒 Carrito (<span id="cart-count">0</span>)
+    </button>
+  </header>
+
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-content">
+
+      <h1>
+        La pizza que<br>
+        <span>te hace volver.</span>
+      </h1>
+
+      <p>
+        Masa artesanal, ingredientes frescos y mucho amor.
+        Descubre el auténtico sabor de una pizza hecha como en Italia.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#menu" class="btn btn-primary">
+          Ver nuestro menú
+        </a>
+
+        <a href="#contacto" class="btn btn-secondary">
+          Contactar
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- MENU -->
+  <section class="menu" id="menu">
+
+    <div class="section-title">
+      <h2>Nuestras pizzas 🍕</h2>
+      <p>Hechas al momento con ingredientes seleccionados.</p>
+    </div>
+
+    <div class="pizza-grid">
+
+      <!-- PIZZA 1 -->
+      <article class="pizza-card">
+        <div class="pizza-image">
+          <img
+            src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80"
+            alt="Pizza Margarita">
+        </div>
+
+        <div class="pizza-info">
+          <h3>Margarita</h3>
+          <p>
+            Tomate, mozzarella fresca, albahaca y aceite de oliva.
+          </p>
+
+          <div class="pizza-bottom">
+            <span class="price">9,90 €</span>
+
+            <button
+              class="add-button"
+              onclick="addToCart('Margarita', 9.90)">
+              + Añadir
+            </button>
+          </div>
+        </div>
+      </article>
+
+
+      <!-- PIZZA 2 -->
+      <article class="pizza-card">
+        <div class="pizza-image">
+          <img
+            src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80"
+            alt="Pizza Pepperoni">
+        </div>
+
+        <div class="pizza-info">
+          <h3>Pepperoni</h3>
+          <p>
+            Mozzarella, tomate y abundante pepperoni crujiente.
+          </p>
+
+          <div class="pizza-bottom">
+            <span class="price">11,90 €</span>
+
+            <button
+              class="add-button"
+              onclick="addToCart('Pepperoni', 11.90)">
+              + Añadir
+            </button>
+          </div>
+        </div>
+      </article>
+
+
+      <!-- PIZZA 3 -->
+      <article class="pizza-card">
+        <div class="pizza-image">
+          <img
+            src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=80"
+            alt="Pizza cuatro quesos">
+        </div>
+
+        <div class="pizza-info">
+          <h3>4 Quesos</h3>
+          <p>
+            Mozzarella, parmesano, gorgonzola y provolone.
+          </p>
+
+          <div class="pizza-bottom">
+            <span class="price">12,50 €</span>
+
+            <button
+              class="add-button"
+              onclick="addToCart('4 Quesos', 12.50)">
+              + Añadir
+            </button>
+          </div>
+        </div>
+      </article>
+
+
+      <!-- PIZZA 4 -->
+      <article class="pizza-card">
+        <div class="pizza-image">
+          <img
+            src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=800&q=80"
+            alt="Pizza vegetal">
+        </div>
+
+        <div class="pizza-info">
+          <h3>Vegetal</h3>
+          <p>
+            Pimientos, champiñones, cebolla, aceitunas y mozzarella.
+          </p>
+
+          <div class="pizza-bottom">
+            <span class="price">11,50 €</span>
+
+            <button
+              class="add-button"
+              onclick="addToCart('Vegetal', 11.50)">
+              + Añadir
+            </button>
+          </div>
+        </div>
+      </article>
+
+
+      <!-- PIZZA 5 -->
+      <article class="pizza-card">
+        <div class="pizza-image">
+          <img
+            src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=80"
+            alt="Pizza BBQ">
+        </div>
+
+        <div class="pizza-info">
+          <h3>BBQ</h3>
+          <p>
+            Pollo, bacon, mozzarella, cebolla y salsa barbacoa.
+          </p>
+
+          <div class="pizza-bottom">
+            <span class="price">13,50 €</span>
+
+            <button
+              class="add-button"
+              onclick="addToCart('BBQ', 13.50)">
+              + Añadir
+            </button>
+          </div>
+        </div>
+      </article>
+
+
+      <!-- PIZZA 6 -->
+      <article class="pizza-card">
+        <div class="pizza-image">
+          <img
+            src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?auto=format&fit=crop&w=800&q=80"
+            alt="Pizza Prosciutto">
+        </div>
+
+        <div class="pizza-info">
+          <h3>Prosciutto</h3>
+          <p>
+            Jamón cocido, mozzarella, tomate y champiñones.
+          </p>
+
+          <div class="pizza-bottom">
+            <span class="price">12,90 €</span>
+
+            <button
+              class="add-button"
+              onclick="addToCart('Prosciutto', 12.90)">
+              + Añadir
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- NOSOTROS -->
+  <section class="about" id="nosotros">
+
+    <div>
+      <img
+        src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1000&q=80"
+        alt="Pizza artesanal">
+    </div>
+
+    <div>
+      <h2>Pizza hecha con pasión.</h2>
+
+      <p>
+        En La Forchetta creemos que una buena pizza empieza con buenos
+        ingredientes. Preparamos nuestra masa artesanal cada día y
+        dejamos que fermente lentamente para conseguir una textura
+        ligera y crujiente.
+      </p>
+
+      <p>
+        Nuestro objetivo es sencillo: que cada vez que pruebes una
+        de nuestras pizzas quieras repetir.
+      </p>
+
+      <div class="features">
+        <div class="feature">
+          <strong>🍅 Ingredientes frescos</strong>
+          Productos seleccionados cada día.
+        </div>
+
+        <div class="feature">
+          <strong>🔥 Horno tradicional</strong>
+          Cocinadas a alta temperatura.
+        </div>
+
+        <div class="feature">
+          <strong>🥖 Masa artesanal</strong>
+          Fermentación lenta de nuestra masa.
+        </div>
+
+        <div class="feature">
+          <strong>❤️ Hechas con cariño</strong>
+          Cada pizza se prepara al momento.
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+
+    <div class="section-title">
+      <h2>¿Hablamos? 📞</h2>
+      <p>Haz tu reserva o escríbenos.</p>
+    </div>
+
+    <div class="contact-container">
+
+      <div class="contact-card">
+
+        <h3>Encuéntranos</h3>
+
+        <p>📍 Calle de la Pizza, 25</p>
+        <p>📍 29620 Málaga, España</p>
+        <p>📞 +34 600 123 456</p>
+        <p>✉️ hola@laforchetta.es</p>
+
+        <br>
+
+        <h3>Horario</h3>
+
+        <p>Lunes - Jueves: 18:00 - 23:00</p>
+        <p>Viernes - Sábado: 18:00 - 00:00</p>
+        <p>Domingo: 18:00 - 23:00</p>
+
+      </div>
+
+
+      <div class="contact-card">
+
+        <h3>Escríbenos</h3>
+
+        <form onsubmit="sendMessage(event)">
+
+          <input
+            type="text"
+            placeholder="Tu nombre"
+            required>
+
+          <input
+            type="email"
+            placeholder="Tu email"
+            required>
+
+          <textarea
+            placeholder="¿En qué podemos ayudarte?"
+            required></textarea>
+
+          <button type="submit">
+            Enviar mensaje
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="logo">
+      La <span>Forchetta</span> 🍕
+    </div>
+
+    <p>
+      © 2026 La Forchetta · Pizzería artesanal
+    </p>
+
+  </footer>
+
+
+  <!-- CARRITO -->
+  <div class="cart-panel" id="cart-panel">
+
+    <div class="cart-header">
+      <h2>Tu pedido 🛒</h2>
+
+      <button
+        class="close-cart"
+        onclick="toggleCart()">
+        ×
+      </button>
+    </div>
+
+    <div id="cart-items">
+      <div class="empty-cart">
+        Tu carrito está vacío 🍕
+      </div>
+    </div>
+
+    <div class="cart-total">
+
+      <div class="cart-total-row">
+        <span>Total</span>
+        <span id="cart-total">0,00 €</span>
+      </div>
+
+      <button
+        class="checkout"
+        onclick="checkout()">
+        Realizar pedido
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    // ================= CARRITO =================
+
+    let cart = [];
+
+    function addToCart(name, price) {
+
+      const existing = cart.find(item => item.name === name);
+
+      if (existing) {
+        existing.quantity++;
+      } else {
+        cart.push({
+          name: name,
+          price: price,
+          quantity: 1
+        });
+      }
+
+      updateCart();
+
+      // Abrir carrito automáticamente
+      document.getElementById("cart-panel")
+        .classList.add("active");
+    }
+
+
+    function removeFromCart(name) {
+
+      const item = cart.find(item => item.name === name);
+
+      if (!item) return;
+
+      if (item.quantity > 1) {
+        item.quantity--;
+      } else {
+        cart = cart.filter(item => item.name !== name);
+      }
+
+      updateCart();
+    }
+
+
+    function updateCart() {
+
+      const container =
+        document.getElementById("cart-items");
+
+      const count =
+        document.getElementById("cart-count");
+
+      const totalElement =
+        document.getElementById("cart-total");
+
+      let total = 0;
+      let quantity = 0;
+
+      if (cart.length === 0) {
+
+        container.innerHTML = `
+          <div class="empty-cart">
+            Tu carrito está vacío 🍕
+          </div>
+        `;
+
+      } else {
+
+        container.innerHTML = "";
+
+        cart.forEach(item => {
+
+          const itemTotal =
+            item.price * item.quantity;
+
+          total += itemTotal;
+          quantity += item.quantity;
+
+          const element =
+            document.createElement("div");
+
+          element.className = "cart-item";
+
+          element.innerHTML = `
+            <div class="cart-item-info">
+              <strong>${item.name}</strong>
+              <small>
+                ${item.quantity} ×
+                ${item.price.toFixed(2).replace(".", ",")} €
+              </small>
+            </div>
+
+            <strong>
+              ${itemTotal.toFixed(2).replace(".", ",")} €
+            </strong>
+
+            <button
+              class="remove-item"
+              onclick="removeFromCart('${item.name}')">
+              −
+            </button>
+          `;
+
+          container.appendChild(element);
+        });
+      }
+
+      count.textContent = quantity;
+
+      totalElement.textContent =
+        total.toFixed(2).replace(".", ",") + " €";
+    }
+
+
+    function toggleCart() {
+
+      document
+        .getElementById("cart-panel")
+        .classList.toggle("active");
+    }
+
+
+    function checkout() {
+
+      if (cart.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+      }
+
+      let total = cart.reduce(
+        (sum, item) =>
+          sum + item.price * item.quantity,
+        0
+      );
+
+      alert(
+        "¡Gracias por tu pedido! 🍕\n\n" +
+        "Total: " +
+        total.toFixed(2).replace(".", ",") +
+        " €\n\n" +
+        "Esta demo no realiza pagos reales."
+      );
+    }
+
+
+    // ================= FORMULARIO =================
+
+    function sendMessage(event) {
+
+      event.preventDefault();
+
+      alert(
+        "¡Gracias por contactar con La Forchetta! 🍕\n" +
+        "Hemos recibido tu mensaje."
+      );
+
+      event.target.reset();
+    }
+
+  </script>
+
+</body>
+</html>
